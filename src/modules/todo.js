@@ -1,17 +1,20 @@
 
 
-function toDo(title, description, dueDate, priority) {
+const Todo = (title, description, dueDate, priority) => {
+    const completed = false
+    const toggleComplete = () => {
+            completed = !completed
+    
     return {
         title,
         description,
         dueDate,
         priority,
-        completed: false,
-        toggleComplete() {
-            this.completed = !this.completed
+        completed,
+        toggleComplete,
         }
     }
 
 }
 
-export default toDo
+export default Todo
