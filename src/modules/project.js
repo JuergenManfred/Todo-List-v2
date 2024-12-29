@@ -13,6 +13,7 @@ const Project = (name) => {
     return {
         name,
         todos,
+        id:  Date.now().toString(),
         addTodo,
         removeTodo,
         updateTodo

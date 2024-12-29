@@ -1,3 +1,5 @@
+import Project from "./project";
+
 const Storage = (() => {
   const setProjects = (projects) => {
     localStorage.setItem("projects", JSON.stringify(projects));
@@ -12,13 +14,13 @@ const Storage = (() => {
     if (projectExists) {
       alert("Project already exists");
       return}
-    const newProject = { name: projectName, todos: [] };
+    const newProject = Project(projectName);
     setProjects([...projects, newProject]);
   };
 
-  const addTodoToProject = (projectName, todo) => {
+  const addTodoToProject = (projectId, todo) => {
     const projects = getProjects();
-    const projectIndex = projects.findIndex((project) => project.name === projectName);
+    const projectIndex = projects.findIndex((project) => project.id === projectId);
     if (projectIndex === -1) {
       alert("Project not found");
       return;
@@ -26,11 +28,18 @@ const Storage = (() => {
     projects[projectIndex].todos.push(todo);
     setProjects(projects); 
   }
+
+    const deleteProject = (projectId) => {
+    const projects = getProjects();
+    const newProjects = projects.filter((project) => project.id !== projectId);
+    setProjects(newProjects);
+  }
+
   return {
-    setProjects,
     getProjects,
     addProject,
-    addTodoToProject
+    addTodoToProject,
+    deleteProject
   };
 })();
 export default Storage;
