@@ -7,11 +7,15 @@ const Project = (name) => {
     const removeTodo = (index) => {
         todos.splice(index, todos.length -1)
     }
+    const updateTodo = (index, newTodo) => {
+        todos[index] = newTodo;
+    }
     return {
         name,
         todos,
         addTodo,
-        removeTodo
+        removeTodo,
+        updateTodo
     }
 }
 export default Project
