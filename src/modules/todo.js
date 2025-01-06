@@ -1,9 +1,9 @@
 
-
-const Todo = (title, description, dueDate, priority) => {
-    const completed = false
+const Todo = (title, description, dueDate, priority, completed = false, id = null) => {
+    const todoId = id ? id : Date.now().toString()
     const toggleComplete = () => {
             completed = !completed
+        }
     
     return {
         title,
@@ -12,9 +12,10 @@ const Todo = (title, description, dueDate, priority) => {
         priority,
         completed,
         toggleComplete,
+        id: todoId
         }
     }
 
-}
+
 
 export default Todo

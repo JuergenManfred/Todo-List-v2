@@ -1,45 +1,72 @@
 import Project from "./project";
 
 const Storage = (() => {
+
+  const rehydrateProjects = (rawProject) => {
+  const project = Project(rawProject.name)
+  project.id = rawProject.id
+  project.todos = rawProject.todos.map((rawTodo) => 
+    rehydrateTodos(rawTodo)
+  )
+  return project
+  }
+const rehydrateTodos = (rawTodo) => {
+  return Todo(
+    rawTodo.title,
+    rawTodo.description,
+    rawTodo.dueDate,
+    rawTodo.priority,
+    rawTodo.completed,
+    rawTodo.id
+  )
+}
+
+
   const setProjects = (projects) => {
     localStorage.setItem("projects", JSON.stringify(projects));
   };
   const getProjects = () => {
-    return JSON.parse(localStorage.getItem("projects")) || [];
+    const rawProjects = JSON.parse(localStorage.getItem("projects")) || [];
+    return rawProjects.map((rawProject) => rehydrateProjects(rawProject));
   };
 
-  const addProject = (projectName) => {
+  const addProject = (project) => {
     const projects = getProjects();
-    const projectExists = projects.some((project) => project.name === projectName)
+    const projectExists = projects.some(
+      (projectId) => project.id === projectId
+    );
     if (projectExists) {
       alert("Project already exists");
-      return}
-    const newProject = Project(projectName);
-    setProjects([...projects, newProject]);
+      return;
+    }
+   setProjects([...projects, project]);
   };
 
   const addTodoToProject = (projectId, todo) => {
     const projects = getProjects();
-    const projectIndex = projects.findIndex((project) => project.id === projectId);
+    const projectIndex = projects.findIndex(
+      (project) => project.id === projectId
+    );
     if (projectIndex === -1) {
       alert("Project not found");
       return;
     }
-    projects[projectIndex].todos.push(todo);
-    setProjects(projects); 
-  }
+    projects[projectIndex].addTodo(todo);
+    setProjects(projects);
+  };
 
-    const deleteProject = (projectId) => {
+  const deleteProject = (projectId) => {
     const projects = getProjects();
     const newProjects = projects.filter((project) => project.id !== projectId);
     setProjects(newProjects);
-  }
+  };
 
   return {
     getProjects,
     addProject,
     addTodoToProject,
-    deleteProject
+    deleteProject,
+    setProjects,
   };
 })();
 export default Storage;
