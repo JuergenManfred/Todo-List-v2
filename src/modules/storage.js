@@ -1,13 +1,11 @@
 import Project from "./project";
-
+import Todo from "./todo";
 const Storage = (() => {
 
   const rehydrateProjects = (rawProject) => {
-  const project = Project(rawProject.name)
+  const project = Project(rawProject.name, rawProject.todos.map(rehydrateTodos))
   project.id = rawProject.id
-  project.todos = rawProject.todos.map((rawTodo) => 
-    rehydrateTodos(rawTodo)
-  )
+  
   return project
   }
 const rehydrateTodos = (rawTodo) => {
@@ -20,7 +18,17 @@ const rehydrateTodos = (rawTodo) => {
     rawTodo.id
   )
 }
-
+  const updatedProjects = (updatedProject, projects) => {
+    console.log(updatedProject, projects, "updatedProjects was called");
+    const projectIndex = projects.findIndex(
+      (project) => project.id === updatedProject.id
+    );
+    if (projectIndex === -1) {
+      return projects;
+    }
+    projects[projectIndex] = updatedProject;
+    return projects;
+  }
 
   const setProjects = (projects) => {
     localStorage.setItem("projects", JSON.stringify(projects));
@@ -67,6 +75,7 @@ const rehydrateTodos = (rawTodo) => {
     addTodoToProject,
     deleteProject,
     setProjects,
+    updatedProjects,
   };
 })();
 export default Storage;

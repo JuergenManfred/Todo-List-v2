@@ -1,7 +1,7 @@
 import Storage from "./storage";
 import Project from "./project";
 import Todo from "./todo";
-import { add } from "date-fns";
+
 
 const DOM = (() => {
   const displayProjects = (projects) => {
@@ -14,17 +14,7 @@ const DOM = (() => {
         <h3>${project.name}</h3>
         <button class="project-delete" data-id="${project.id}">Delete</button>
         <button class="project-todo" data-id="${project.id}">Add Todo</button>
-        <div class="todos-container">${project.todos
-          .map(
-            (todo) => `
-                <div class="todo" data-id="${todo.id}">
-                <h4>${todo.title}title</h4>
-                <p>${todo.description}</p>
-                <p>${todo.dueDate}</p>
-                <button class="todo-delete" data-id="${todo.id}">Delete</button>
-                </div>`
-          )
-          .join("")}</div>`;
+        <div class="todos-container">${displayTodos(project.todos)}</div>`;
       projectsContainer.appendChild(projectElement);
     });
     const projectDeleteButtons = document.querySelectorAll(".project-delete");
@@ -45,11 +35,25 @@ const DOM = (() => {
     });
   };
 
-  //const displayTodos = (todos) => {}
+  const displayTodos = (todos) => {
+    return todos.map(
+        (todo) => `
+            <div class="todo" data-id="${todo.id}">
+            <h4>${todo.title}title</h4>
+            <p>${todo.description}</p>
+            <p>${todo.dueDate}</p>
+            <p>${todo.priority}</p>
+            <p>${todo.completed ? "is completed" : "not completed"}</p> // maybe add a checkbox
+            <button class="todo-edit" data-id="${todo.id}">Edit</button>
+            <button class="todo-delete" data-id="${todo.id}">Delete</button>
+            </div>`
+      )
+      .join("")}
+
 
   const renderProjectForm = () => {
     const formContainer = document.querySelector("#form-container");
-    formContainer.innerHTML = ""; // Clear any existing form
+    formContainer.innerHTML = ""; 
 
     const form = document.createElement("form");
     form.innerHTML = `
@@ -74,12 +78,13 @@ const DOM = (() => {
 
   const renderTodoForm = (projectId, todoId = null) => {
     const formContainer = document.querySelector("#form-container");
-    formContainer.innerHTML = ""; // Clear any existing form
+    formContainer.innerHTML = ""; 
 
     const projects = Storage.getProjects();
     const projectInUse = projects.find((project) => project.id === projectId);
     const todo = projectInUse.todos.find((t) => t.id === todoId) || null; // Find todo if editing
     console.log(projectInUse)
+    console.log(todo)
     const form = document.createElement("form");
     form.innerHTML = `
       <label for="title">Title:</label>
@@ -124,21 +129,22 @@ const DOM = (() => {
         todo ? todo.id : null
       );
 
-      if (todo) {
+/*       if (todo) {
         // Update existing todo
         projectInUse.todos = projectInUse.todos.map((t) =>
           t.id === todo.id ? newTodo : t
         );
       } else {
-        // Add new todo
+        // Add new todo */
         projectInUse.addTodo(newTodo);
-      }
-
-      Storage.setProjects(projects);
-      DOM.displayProjects(projects);
-      formContainer.innerHTML = ""; // Clear form after submission
+        console.log(projectInUse.todos)
+        console.log(projectInUse, projects, "renderTodoForm was called");
+     /*  } */
+      const uptoDatedProjects = Storage.updatedProjects(projectInUse, projects);
+      Storage.setProjects(uptoDatedProjects);
+      DOM.displayProjects(uptoDatedProjects);
+      formContainer.innerHTML = "";
     });
-
     formContainer.appendChild(form);
   };
 
