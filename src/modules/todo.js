@@ -2,7 +2,7 @@
 const Todo = (title, description, dueDate, priority, completed = false, id = null) => {
     const todoId = id ? id : Date.now().toString()
     const toggleComplete = () => {
-            completed = !completed
+            return completed = !completed
         }
     
     return {
@@ -11,8 +11,8 @@ const Todo = (title, description, dueDate, priority, completed = false, id = nul
         dueDate,
         priority,
         completed,
-        toggleComplete,
-        id: todoId
+        id: todoId,
+        toggleComplete
         }
     }
 

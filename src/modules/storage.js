@@ -3,9 +3,8 @@ import Todo from "./todo";
 const Storage = (() => {
 
   const rehydrateProjects = (rawProject) => {
-  const project = Project(rawProject.name, rawProject.todos.map(rehydrateTodos))
+  const project = Project(rawProject.name, rawProject.todos.map(rehydrateTodos), rawProject.showAll)
   project.id = rawProject.id
-  
   return project
   }
 const rehydrateTodos = (rawTodo) => {
