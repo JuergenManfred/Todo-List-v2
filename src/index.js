@@ -2,6 +2,7 @@ import DOM from "./modules/dom";
 import Project from "./modules/project";
 import Storage from "./modules/storage";
 import Todo from "./modules/todo";
+import Filter from "./modules/filter";
 import "./styles/style.css";
 let projects = Storage.getProjects();
 DOM.displayProjects(projects);

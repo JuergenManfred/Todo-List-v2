@@ -9,8 +9,18 @@
     
     <div id="app">
     <button class="add-project"><h1>+</h1></button>
-      <div id="project-list"></div>
-      <div id="todo-list"></div>
+    <input type="text" class="todo-search" placeholder="Search todos..." />
+    <select class="todo-filter-status">
+      <option value="all">All Status</option>
+      <option value="completed">Completed</option>
+      <option value="incomplete">Incomplete</option>
+    </select>
+    <select class="todo-filter-priority">
+      <option value="all">All Priorities</option>
+      <option value="low">Low Priority</option>
+      <option value="medium">Medium Priority</option>
+      <option value="high">High Priority</option>
+    </select>
       <div id="form-container"></div>
       <div class="projects-container"></div>
     </div>

@@ -68,6 +68,7 @@ const DOM = (() => {
         const project = findProjectById(projects, projectId);
         const todo = project.todos.find((todo) => todo.id === todoId);
         todo.completed = todo.toggleComplete();
+        console.log(project.getShowAll())
         Storage.setProjects(projects);
         displayProjects(projects);
       });
@@ -79,8 +80,7 @@ const DOM = (() => {
         const projectId = e.target.closest(".project").querySelector(".project-todo").getAttribute("data-id");
         const projects = Storage.getProjects();
         const project = findProjectById(projects, projectId);
-        let showAll = project.getShowAll();
-        project.showAll = !showAll;
+        project.showAll = project.toggleShowAll();
         Storage.setProjects(projects);
         displayProjects(projects);
       });
@@ -92,8 +92,7 @@ const DOM = (() => {
         const projectId = e.target.closest(".project").querySelector(".project-todo").getAttribute("data-id");
         const projects = Storage.getProjects();
         const project = findProjectById(projects, projectId);
-        let showAll = project.getShowAll();
-        project.showAll = !showAll;
+        project.showAll = project.toggleShowAll();
         Storage.setProjects(projects);
         displayProjects(projects);
       });
@@ -131,8 +130,6 @@ const DOM = (() => {
 
   const renderProjectForm = () => {
     const formContainer = document.querySelector("#form-container");
-    formContainer.innerHTML = ""; 
-
     const form = document.createElement("form");
     form.innerHTML = `
       <label for="projectName">Project Name:</label>
@@ -147,7 +144,7 @@ const DOM = (() => {
       if (newProject) {
         Storage.addProject(newProject);
         DOM.displayProjects(Storage.getProjects());
-        form.innerHTML = "";
+        form.remove();
       }
     });
 
@@ -231,6 +228,11 @@ const DOM = (() => {
     });
     formContainer.appendChild(form);
   };
+
+
+
+
+
 
   return {
     displayProjects,

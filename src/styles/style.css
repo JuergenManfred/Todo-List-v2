@@ -166,7 +166,8 @@ form {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 1rem;
-  width: 90%
+  width: 100%;
+  max-width: 100%;
 }
 
 form label {
@@ -178,9 +179,10 @@ form input[type="text"],
 form input[type="date"],
 form textarea,
 form select {
-  width: 100%;
+  width: 90%;
   padding: 8px;
   margin-bottom: 10px;
+  margin-right: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
