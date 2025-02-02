@@ -1,4 +1,3 @@
-Below is a concise README in Markdown format you can use for your project:
 
 ---
 
