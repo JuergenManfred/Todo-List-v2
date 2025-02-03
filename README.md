@@ -4,6 +4,7 @@
 # Todo App
 
 A dynamic, modular Todo App built with vanilla JavaScript, using factory functions for object creation, localStorage for persistence, and webpack for bundling. Manage multiple projects, add and edit todos, mark them complete, search, filter, and more—all in one simple application.
+Live Demo: https://todo-list-v222.netlify.app/
 
 ## Features
 
