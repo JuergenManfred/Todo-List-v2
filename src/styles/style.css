@@ -195,7 +195,7 @@ form button:hover {
   flex-wrap: wrap;
 }
 
-.filter-section input[type="text"],
+.filter-section input,
 .filter-section select {
   width: 200px;
   padding: 0.5rem 0.8rem;
@@ -208,13 +208,13 @@ form button:hover {
   transition: border-color 0.2s ease-in-out;
 }
 
-.filter-section input[type="text"]:focus,
+.filter-section input:focus,
 .filter-section select:focus {
   outline: none;
   border-color: #4caf50;
 }
 
-.filter-section input[type="text"]:hover,
+.filter-section input:hover,
 .filter-section select:hover {
   border-color: #45a049;
 }
