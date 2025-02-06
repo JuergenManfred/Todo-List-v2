@@ -2,7 +2,6 @@ import Storage from "./storage";
 import Project from "./project";
 import Todo from "./todo";
 
-
 const DOM = (() => {
   const findProjectById = (projects, projectId) => {
     return projects.find((project) => project.id === projectId);
@@ -18,7 +17,11 @@ const DOM = (() => {
         <h3>${project.name}</h3>
         <button class="project-delete" data-id="${project.id}">Delete</button>
         <button class="project-todo" data-id="${project.id}">Add Todo</button>
-        <div class="todos-container" data-id="${project.id}">${displayTodos(project.todos, project.getShowAll(), project.getShowTodosLimit())}</div>`;
+        <div class="todos-container" data-id="${project.id}">${displayTodos(
+        project.todos,
+        project.getShowAll(),
+        project.getShowTodosLimit()
+      )}</div>`;
       projectsContainer.appendChild(projectElement);
     });
     const projectDeleteButtons = document.querySelectorAll(".project-delete");
@@ -42,7 +45,10 @@ const DOM = (() => {
     todoEditButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
         const todoId = e.target.getAttribute("data-id");
-        const projectId = e.target.closest(".project").querySelector(".project-todo").getAttribute("data-id");
+        const projectId = e.target
+          .closest(".project")
+          .querySelector(".project-todo")
+          .getAttribute("data-id");
         renderTodoForm(projectId, todoId);
       });
     });
@@ -51,7 +57,10 @@ const DOM = (() => {
     todoDeleteButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
         const todoId = e.target.getAttribute("data-id");
-        const projectId = e.target.closest(".project").querySelector(".project-todo").getAttribute("data-id");
+        const projectId = e.target
+          .closest(".project")
+          .querySelector(".project-todo")
+          .getAttribute("data-id");
         const projects = Storage.getProjects();
         const project = findProjectById(projects, projectId);
         project.removeTodo(todoId);
@@ -63,7 +72,10 @@ const DOM = (() => {
     todoCompleteCheckboxes.forEach((checkbox) => {
       checkbox.addEventListener("change", (e) => {
         const todoId = e.target.getAttribute("data-id");
-        const projectId = e.target.closest(".project").querySelector(".project-todo").getAttribute("data-id");
+        const projectId = e.target
+          .closest(".project")
+          .querySelector(".project-todo")
+          .getAttribute("data-id");
         const projects = Storage.getProjects();
         const project = findProjectById(projects, projectId);
         const todo = project.todos.find((todo) => todo.id === todoId);
@@ -76,7 +88,10 @@ const DOM = (() => {
     const showMoreButtons = document.querySelectorAll(".show-more");
     showMoreButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
-        const projectId = e.target.closest(".project").querySelector(".project-todo").getAttribute("data-id");
+        const projectId = e.target
+          .closest(".project")
+          .querySelector(".project-todo")
+          .getAttribute("data-id");
         const projects = Storage.getProjects();
         const project = findProjectById(projects, projectId);
         project.showAll = project.toggleShowAll();
@@ -88,7 +103,10 @@ const DOM = (() => {
     const showLessButtons = document.querySelectorAll(".show-less");
     showLessButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
-        const projectId = e.target.closest(".project").querySelector(".project-todo").getAttribute("data-id");
+        const projectId = e.target
+          .closest(".project")
+          .querySelector(".project-todo")
+          .getAttribute("data-id");
         const projects = Storage.getProjects();
         const project = findProjectById(projects, projectId);
         project.showAll = project.toggleShowAll();
@@ -96,36 +114,44 @@ const DOM = (() => {
         displayProjects(projects);
       });
     });
-
   };
 
   const displayTodos = (todos, showAll, showTodosLimit) => {
     const todosLength = todos.length;
-    if(!showAll) {
+    if (!showAll) {
       todos = todos.slice(0, showTodosLimit);
     }
-    return todos.map(
-        (todo) => `
-            <div class="todo ${todo.completed ? 'completed' : ''}" data-id="${todo.id}">
+    return (
+      todos
+        .map(
+          (todo) => `
+            <div class="todo ${todo.completed ? "completed" : ""}" data-id="${
+            todo.id
+          }">
             <h4>${todo.title}title</h4>
             <p>${todo.description}</p>
             <p>${todo.dueDate}</p>
-            <p class="priority-badge priority-${todo.priority}">${todo.priority}</p>
+            <p class="priority-badge priority-${todo.priority}">${
+            todo.priority
+          }</p>
             <p>${todo.completed ? "is completed" : "not completed"}</p>
-            <input type="checkbox" class="todo-complete" data-id="${todo.id}" ${todo.completed ? "checked" : ""}>
+            <input type="checkbox" class="todo-complete" data-id="${todo.id}" ${
+            todo.completed ? "checked" : ""
+          }>
             <div class="todo-buttons">
             <button class="todo-edit" data-id="${todo.id}">Edit</button>
             <button class="todo-delete" data-id="${todo.id}">Delete</button>
             </div>
             </div>`
-      )
-      .join("") +
+        )
+        .join("") +
       (todosLength > showTodosLimit && !showAll
         ? `<button class="show-more">Show More</button>`
         : showAll
         ? `<button class="show-less">Show Less</button>`
-        : "");}
-
+        : "")
+    );
+  };
 
   const renderProjectForm = () => {
     const formContainer = document.querySelector("#form-container");
@@ -139,7 +165,7 @@ const DOM = (() => {
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const newProject = Project(form.projectName.value)
+      const newProject = Project(form.projectName.value);
       if (newProject) {
         Storage.addProject(newProject);
         DOM.displayProjects(Storage.getProjects());
@@ -151,20 +177,21 @@ const DOM = (() => {
   };
 
   const renderTodoForm = (projectId, todoId = null) => {
-    
     const projects = Storage.getProjects();
     const projectInUse = findProjectById(projects, projectId);
     const todo = projectInUse.todos.find((t) => t.id === todoId) || null; // Find todo if editing
     const formContainer = todo
-    ? document.querySelector(`.todo[data-id="${todoId}"]`)
-    : document.querySelector(`.project .todos-container[data-id="${projectId}"]`);
+      ? document.querySelector(`.todo[data-id="${todoId}"]`)
+      : document.querySelector(
+          `.project .todos-container[data-id="${projectId}"]`
+        );
 
-    formContainer.innerHTML = ""; 
-  
+    formContainer.innerHTML = "";
+
     if (!formContainer) {
       console.error("Form container not found");
-      console.log(projectInUse)
-      console.log(todo)
+      console.log(projectInUse);
+      console.log(todo);
       return;
     }
     const form = document.createElement("form");
@@ -217,9 +244,8 @@ const DOM = (() => {
           t.id === todo.id ? newTodo : t
         );
       } else {
-        
         projectInUse.addTodo(newTodo);
-     }
+      }
       const uptoDatedProjects = Storage.updatedProjects(projectInUse, projects);
       Storage.setProjects(uptoDatedProjects);
       DOM.displayProjects(uptoDatedProjects);
@@ -227,11 +253,6 @@ const DOM = (() => {
     });
     formContainer.appendChild(form);
   };
-
-
-
-
-
 
   return {
     displayProjects,
