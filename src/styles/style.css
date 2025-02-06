@@ -52,11 +52,6 @@ header {
   margin-top: 1rem;
   width: 90%;
 }
-/* .project .todo {
-  display: none; /* Hide all todos by default */
-
-/* .project .todo:nth-child(-n+2) {
-  display: flex; /* Show only the first two todos */
 
 .todo {
   background-color: #d7fdb599;

@@ -68,7 +68,6 @@ const DOM = (() => {
         const project = findProjectById(projects, projectId);
         const todo = project.todos.find((todo) => todo.id === todoId);
         todo.completed = todo.toggleComplete();
-        console.log(project.getShowAll())
         Storage.setProjects(projects);
         displayProjects(projects);
       });
