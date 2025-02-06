@@ -3,9 +3,8 @@ body {
   font-family: Arial, sans-serif;
 }
 
-
 header {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 1rem;
   text-align: center;
@@ -13,9 +12,9 @@ header {
 
 .app {
   height: 100vh;
-  width: 100vh;             
+  width: 100vh;
   display: flex;
-  flex-direction: column;     
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -26,8 +25,8 @@ header {
   background-color: #d6d6d698;
   justify-content: center;
   padding: 1rem;
-  margin: 0 auto; 
-  box-sizing: border-box; 
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .project {
@@ -41,7 +40,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;  
+  width: 90%;
 }
 
 .todos-container {
@@ -51,15 +50,10 @@ header {
   align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
-  width: 90%
-  
-  
-  
-
+  width: 90%;
 }
 /* .project .todo {
   display: none; /* Hide all todos by default */
-
 
 /* .project .todo:nth-child(-n+2) {
   display: flex; /* Show only the first two todos */
@@ -73,21 +67,20 @@ header {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  width: 90%
+  width: 90%;
 }
 
 .todo h4 {
   font-size: 1rem;
   font-weight: bold;
   color: #333;
-
 }
 .todo p {
   font-size: 0.9rem;
   margin: 0.2rem 0;
   color: #555;
   word-wrap: break-word;
-  white-space: normal; 
+  white-space: normal;
   overflow: hidden;
   max-width: 70%;
   text-align: center;
@@ -104,15 +97,14 @@ header {
   border-radius: 4px;
   font-size: 0.8rem;
   font-weight: bold;
-  
 }
 
 .todo .priority-low {
-  color: #4caf50; 
+  color: #4caf50;
 }
 
 .todo .priority-medium {
-  color: #ff9800; 
+  color: #ff9800;
 }
 
 .todo .priority-high {
@@ -139,12 +131,12 @@ header {
   background-color: #d7fdb599;
   border: 1px solid #ddd;
   border-radius: 5px;
-  all: unset; 
-  text-decoration: none; 
+  all: unset;
+  text-decoration: none;
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -199,5 +191,36 @@ form button {
 form button:hover {
   background-color: #0056b3;
 }
+.filter-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem auto;
+  flex-wrap: wrap;
+}
 
+.filter-section input[type="text"],
+.filter-section select {
+  width: 200px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s ease-in-out;
+}
+
+.filter-section input[type="text"]:focus,
+.filter-section select:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+.filter-section input[type="text"]:hover,
+.filter-section select:hover {
+  border-color: #45a049;
+}
 
