@@ -6,9 +6,55 @@
     <title>Todo App</title>
   </head>
   <body>
+
     
-    <div id="app">
-    <button class="add-project"><h1>+</h1></button>
+
+
+    <div id="app"><header>
+
+      <div class="carousel-container">
+
+      <div class="carousel-slides">
+        <div class="carousel-slide">
+          <svg viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="#14e2e9" />
+            <text x="50%" y="50%">
+              Start your day with a plan!
+            </text>
+          </svg>
+        </div>
+        <div class="carousel-slide">
+          <svg viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="#2196F3" />
+            <text x="50%" y="50%">
+              Make every moment count!
+            </text>
+          </svg>
+        </div>
+        <div class="carousel-slide">
+          <svg viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="#FF9800" />
+            <text x="50%" y="50%">
+              Focus on what matters!
+            </text>
+          </svg>
+        </div>
+      </div>
+
+        <button class="carousel-prev-btn">&#10094;</button>
+        <button class="carousel-next-btn">&#10095;</button>
+        <div class="carousel-dots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+          
+        </div>
+      </div>
+      <button class="add-project"><h1>+</h1></button>
+
+    </header>
+
+
     <div class="filter-section">
 
       <input type="text" class="todo-search" placeholder="Search todos..."/>
